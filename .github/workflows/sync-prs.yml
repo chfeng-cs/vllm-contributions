@@ -1,0 +1,35 @@
+name: Sync PR Statuses
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # 每天 UTC 02:00 (北京时间 10:00)
+  workflow_dispatch:        # 允许手动触发
+
+permissions:
+  contents: write           # 需要写权限来 commit README
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run sync script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Actions 自动提供，无需额外配置
+        run: python scripts/update_readme.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "chore: sync PR statuses [skip ci]"
+          git push

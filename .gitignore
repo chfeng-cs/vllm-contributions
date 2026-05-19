@@ -1,0 +1,169 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+sdist/
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+*.test.log
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# ── ML / AI ───────────────────────────────────────────────────────────────────
+# Model weights & checkpoints
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.gguf
+*.ckpt
+*.pkl
+*.pickle
+checkpoints/
+runs/
+wandb/
+mlruns/
+lightning_logs/
+
+# Datasets
+*.parquet
+*.arrow
+*.feather
+data/
+datasets/
+cache/
+.cache/
+__pycache__/
+
+# Benchmark / profiling output
+*.nsys-rep
+*.qdrep
+*.sqlite
+*.nvvp
+*.prof
+benchmark_results/
+bench_output/
+profile_output/
+
+# ── CUDA / Triton ─────────────────────────────────────────────────────────────
+*.ptx
+*.cubin
+*.fatbin
+*.o
+*.so
+*.a
+*.dylib
+*.dll
+.triton/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Editors ───────────────────────────────────────────────────────────────────
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+Session.vim
+.netrwhist
+tags
+
+# Emacs
+*~
+\#*\#
+.#*
+
+# ── Secrets & credentials ─────────────────────────────────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+.secrets
+
+# ── Logs & temp ───────────────────────────────────────────────────────────────
+*.log
+*.out
+*.tmp
+*.temp
+tmp/
+temp/
+logs/
+
+# ── Node (if any tooling uses it) ─────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
