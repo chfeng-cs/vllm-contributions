@@ -35,7 +35,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 | [vllm#42160](https://github.com/vllm-project/vllm/pull/42160) | [Docs] Fix broken local links | ✅ Merged | — |
 | [vllm#42077](https://github.com/vllm-project/vllm/pull/42077) | [Docs] Update server entrypoint examples | ✅ Merged | — |
 
-> Last synced: 2026-05-22 06:01 UTC
+> Last synced: 2026-05-23 05:35 UTC
 <!-- PR_TABLE_END -->
 
 ---
