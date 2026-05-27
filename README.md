@@ -15,7 +15,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 | PR | Title | Status | Impact |
 |----|-------|--------|--------|
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | ~102ms TTFT reduction (benchmark on A10) |
-| [vllm#41847](https://github.com/vllm-project/vllm/pull/41847) | [KV Transfer] Enable HMA by default for connectors that support it | 🔄 Open | Reduces user config burden; fixes MultiConnector gap vs PR #42045 |
+| [vllm#41847](https://github.com/vllm-project/vllm/pull/41847) | [KV Transfer] Enable HMA by default for connectors that support it | ✅ Merged | Reduces user config burden; fixes MultiConnector gap vs PR #42045 |
 
 ### Docs
 
@@ -35,7 +35,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 | [vllm#42160](https://github.com/vllm-project/vllm/pull/42160) | [Docs] Fix broken local links | ✅ Merged | — |
 | [vllm#42077](https://github.com/vllm-project/vllm/pull/42077) | [Docs] Update server entrypoint examples | ✅ Merged | — |
 
-> Last synced: 2026-05-26 06:01 UTC
+> Last synced: 2026-05-27 06:14 UTC
 <!-- PR_TABLE_END -->
 
 ---
