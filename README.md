@@ -28,6 +28,8 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 
 | PR | Title | Status | Impact |
 |----|-------|--------|--------|
+| [vllm#44101](https://github.com/vllm-project/vllm/pull/44101) | [LMCache] fix lookup lock leak when request is aborted before alloc | 🔄 Open | — |
+| [vllm#44097](https://github.com/vllm-project/vllm/pull/44097) | [LMCache] fix missing cache_salt in free_lookup_locks call | 🔄 Open | — |
 | [vllm#42872](https://github.com/vllm-project/vllm/pull/42872) | [Bugfix][Model Runner v2] Fix MRV2 KV cache kernel block sizing. | ❌ Closed | — |
 | [vllm#42321](https://github.com/vllm-project/vllm/pull/42321) | [KV Connector] Implement on_new_request for LMCacheMPConnector | 🔄 Open | — |
 | [vllm#42214](https://github.com/vllm-project/vllm/pull/42214) | [Test][Bugfix] Fix mypy error: missing enable_prompt_embeds arg in test_tp_sp_nvfp4_generation | ❌ Closed | — |
@@ -35,7 +37,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 | [vllm#42160](https://github.com/vllm-project/vllm/pull/42160) | [Docs] Fix broken local links | ✅ Merged | — |
 | [vllm#42077](https://github.com/vllm-project/vllm/pull/42077) | [Docs] Update server entrypoint examples | ✅ Merged | — |
 
-> Last synced: 2026-05-31 06:12 UTC
+> Last synced: 2026-06-01 06:48 UTC
 <!-- PR_TABLE_END -->
 
 ---
