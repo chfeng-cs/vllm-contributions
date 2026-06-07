@@ -36,13 +36,17 @@ CATEGORY_ORDER = ["Core Feature", "Bug Fix", "Review / Discussion", "Docs", "Oth
 # Only fill in PRs you want to highlight.
 # Unannotated PRs still appear automatically under "Other".
 ANNOTATIONS: dict[tuple[str, int], dict] = {
-    ("vllm-project/vllm", 42086): {
+    ("vllm-project/vllm", 42321): {
         "category": "Core Feature",
-        "impact": "~102ms TTFT reduction (benchmark on A10)",
+        "impact": "~25% TTFT reduction (benchmarked under high load with disk KV prefetch, L20)",
     },
     ("vllm-project/vllm", 41847): {
         "category": "Core Feature",
         "impact": "Reduces user config burden; fixes MultiConnector gap vs PR #42045",
+    },
+    ("vllm-project/vllm", 42206): {
+        "category": "Metrics",
+        "impact": "Add group-aware KV cache capacity Prometheus gauges",
     },
     # ("vllm-project/vllm", XXXX): {   # ← Prometheus overcounting PR, fill when open
     #     "category": "Bug Fix",
@@ -57,6 +61,14 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
         "impact": "—",
     },
     ("vllm-project/vllm", 42066): {
+        "category": "Docs",
+        "impact": "—",
+    },
+    ("vllm-project/vllm", 42160): {
+        "category": "Docs",
+        "impact": "—",
+    },
+    ("vllm-project/vllm", 42077): {
         "category": "Docs",
         "impact": "—",
     },
