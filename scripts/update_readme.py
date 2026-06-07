@@ -48,6 +48,14 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
         "category": "Metrics",
         "impact": "Add group-aware KV cache capacity Prometheus gauges",
     },
+    ("vllm-project/vllm", 44101): {
+        "category": "Bug Fix",
+        "impact": "—",
+    },
+    ("vllm-project/vllm", 44097): {
+        "category": "Bug Fix",
+        "impact": "—",
+    },
     # ("vllm-project/vllm", XXXX): {   # ← Prometheus overcounting PR, fill when open
     #     "category": "Bug Fix",
     #     "impact": "Correctness fix: Prometheus metrics overcounting for HMA hybrid models",
@@ -71,6 +79,18 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
     ("vllm-project/vllm", 42077): {
         "category": "Docs",
         "impact": "—",
+    },
+    ("vllm-project/vllm", 42872): {
+        "category": "Other",
+        "impact": "Closed: implemented by core maintainer",
+    },
+    ("vllm-project/vllm", 42214): {
+        "category": "Other", 
+        "impact": "Closed: duplicate",
+    },
+    ("vllm-project/vllm", 42086): {
+        "category": "Other",
+        "impact": "Closed: first version of PR #42321, abandoned due to significant design differences",
     },
 }
 # ──────────────────────────────────────────────────────────────────────────────
