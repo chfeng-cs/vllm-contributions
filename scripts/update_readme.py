@@ -105,6 +105,14 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
         "category": "Feature",
         "impact": "—",
     },
+    ("vllm-project/vllm", 44096): {
+        "category": "Excluded",
+        "impact": "—",
+    },
+    ("vllm-project/vllm", 44100): {
+        "category": "Excluded",
+        "impact": "—",
+    },
 }
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -202,6 +210,11 @@ def build_table(all_items: list[dict]) -> str:
         key        = (item["repo"], item["number"])
         annotation = ANNOTATIONS.get(key, {})
         category   = annotation.get("category", "Other")
+        
+        # Skip excluded items
+        if category == "Excluded":
+            continue
+            
         impact     = annotation.get("impact", "—")
         badge      = status_badge(item)
         url        = item["html_url"]
