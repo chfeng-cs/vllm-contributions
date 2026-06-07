@@ -29,7 +29,7 @@ TARGET_REPOS = [
     # "triton-lang/triton",
 ]
 
-CATEGORY_ORDER = ["Core Feature", "Bug Fix", "Review / Discussion", "Docs", "Other"]
+CATEGORY_ORDER = ["Issue", "Core Feature", "Bug Fix", "Review / Discussion", "Docs", "Other"]
 
 # ── MANUAL ANNOTATIONS ────────────────────────────────────────────────────────
 # Key: ("owner/repo", pr_number)
@@ -81,7 +81,7 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
         "impact": "—",
     },
     ("vllm-project/vllm", 42872): {
-        "category": "Other",
+        "category": "Bug Fix",
         "impact": "Closed: implemented by core maintainer",
     },
     ("vllm-project/vllm", 42214): {
@@ -91,6 +91,10 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
     ("vllm-project/vllm", 42086): {
         "category": "Other",
         "impact": "Closed: first version of PR #42321, abandoned due to significant design differences",
+    },
+    ("vllm-project/vllm", 42846): {
+        "category": "Issue",
+        "impact": "—",
     },
 }
 # ──────────────────────────────────────────────────────────────────────────────
@@ -195,10 +199,17 @@ def build_table(all_prs: list[dict]) -> str:
         rows = rows_by_category.get(cat, [])
         if not rows:
             continue
-        lines.append(f"\n### {cat}\n")
-        lines.append("| PR | Title | Status | Impact |")
-        lines.append("|----|-------|--------|--------|")
-        lines.extend(rows)
+        if cat == "Issue":
+            lines.append(f"\n<details>\n<summary>{cat}</summary>\n")
+            lines.append("| Issue | Title | Status | Impact |")
+            lines.append("|-------|-------|--------|--------|")
+            lines.extend(rows)
+            lines.append("</details>")
+        else:
+            lines.append(f"\n### {cat}\n")
+            lines.append("| PR | Title | Status | Impact |")
+            lines.append("|----|-------|--------|--------|")
+            lines.extend(rows)
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     lines.append(f"\n> Last synced: {now}")
