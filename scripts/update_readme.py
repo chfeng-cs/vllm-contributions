@@ -44,6 +44,7 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
     ("vllm-project/vllm", 41847): {
         "category": "Feature",
         "impact": "Reduces user config burden; fixes MultiConnector gap vs PR #42045",
+        "merged": True,
     },
     ("vllm-project/vllm", 42206): {
         "category": "Metrics",
@@ -216,6 +217,10 @@ def build_table(all_items: list[dict]) -> str:
             continue
             
         impact     = annotation.get("impact", "—")
+        # Override merged status from annotation if specified
+        if annotation.get("merged"):
+            item = dict(item)  # Make a copy
+            item["merged_at"] = "manual"
         badge      = status_badge(item)
         url        = item["html_url"]
         number     = item["number"]
@@ -232,7 +237,7 @@ def build_table(all_items: list[dict]) -> str:
         if not rows:
             continue
         if cat == "Issue":
-            lines.append(f"\n<details>\n<summary>{cat}</summary>\n")
+            lines.append(f"\n<details open>\n<summary>{cat}</summary>\n")
             lines.append("| Issue | Title | Status | Impact |")
             lines.append("|-------|-------|--------|--------|")
             lines.extend(rows)
