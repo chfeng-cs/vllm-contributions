@@ -128,44 +128,52 @@ def gh_api(path: str, params: dict | None = None) -> dict | list:
         return {}
 
 
-def fetch_all_prs(repo: str) -> list[dict]:
-    """Fetch all PRs (open + closed) authored by GITHUB_USER in a repo."""
+def fetch_all_prs_and_issues(repo: str) -> list[dict]:
+    """Fetch all PRs and issues (open + closed) authored by GITHUB_USER in a repo."""
     owner, name = repo.split("/")
-    all_prs = []
-    page = 1
-
-    print(f"  Fetching PRs from {repo}...")
-    while True:
-        result = gh_api("/search/issues", {
-            "q": f"author:{GITHUB_USER} type:pr repo:{repo}",
-            "per_page": 100,
-            "page": page,
-        })
-        items = result.get("items", [])
-        if not items:
-            break
-
-        for item in items:
-            pr_number = item["number"]
-            # Search API doesn't include merged_at; fetch PR detail separately
-            pr_detail = gh_api(f"/repos/{owner}/{name}/pulls/{pr_number}")
-            all_prs.append({
-                "repo":      repo,
-                "number":    pr_number,
-                "title":     item["title"],
-                "html_url":  item["html_url"],
-                "state":     item["state"],
-                "merged_at": pr_detail.get("merged_at") if isinstance(pr_detail, dict) else None,
+    all_items = []
+    
+    for item_type in ["pr", "issue"]:
+        page = 1
+        print(f"  Fetching {item_type}s from {repo}...")
+        
+        while True:
+            result = gh_api("/search/issues", {
+                "q": f"author:{GITHUB_USER} type:{item_type} repo:{repo}",
+                "per_page": 100,
+                "page": page,
             })
-            time.sleep(0.1)
+            items = result.get("items", [])
+            if not items:
+                break
 
-        if len(items) < 100:
-            break
-        page += 1
-        time.sleep(0.5)
+            for item in items:
+                number = item["number"]
+                if item_type == "pr":
+                    # Search API doesn't include merged_at; fetch PR detail separately
+                    detail = gh_api(f"/repos/{owner}/{name}/pulls/{number}")
+                    merged_at = detail.get("merged_at") if isinstance(detail, dict) else None
+                else:
+                    merged_at = None
+                    
+                all_items.append({
+                    "repo":      repo,
+                    "number":    number,
+                    "title":     item["title"],
+                    "html_url":  item["html_url"],
+                    "state":     item["state"],
+                    "merged_at": merged_at,
+                    "item_type": item_type,
+                })
+                time.sleep(0.1)
 
-    print(f"  Found {len(all_prs)} PR(s) in {repo}")
-    return all_prs
+            if len(items) < 100:
+                break
+            page += 1
+            time.sleep(0.5)
+
+    print(f"  Found {len(all_items)} item(s) in {repo}")
+    return all_items
 
 
 def status_badge(pr: dict) -> str:
@@ -176,20 +184,20 @@ def status_badge(pr: dict) -> str:
     return "❌ Closed"
 
 
-def build_table(all_prs: list[dict]) -> str:
+def build_table(all_items: list[dict]) -> str:
     rows_by_category: dict[str, list[str]] = {cat: [] for cat in CATEGORY_ORDER}
 
-    for pr in all_prs:
-        key        = (pr["repo"], pr["number"])
+    for item in all_items:
+        key        = (item["repo"], item["number"])
         annotation = ANNOTATIONS.get(key, {})
         category   = annotation.get("category", "Other")
         impact     = annotation.get("impact", "—")
-        badge      = status_badge(pr)
-        url        = pr["html_url"]
-        number     = pr["number"]
+        badge      = status_badge(item)
+        url        = item["html_url"]
+        number     = item["number"]
         # Shorten repo name for display: "vllm-project/vllm" → "vllm"
-        repo_short = pr["repo"].split("/")[-1]
-        title      = pr["title"]
+        repo_short = item["repo"].split("/")[-1]
+        title      = item["title"]
 
         row = f"| [{repo_short}#{number}]({url}) | {title} | {badge} | {impact} |"
         rows_by_category.setdefault(category, []).append(row)
@@ -246,17 +254,17 @@ if __name__ == "__main__":
     if not os.environ.get("GITHUB_TOKEN"):
         print("Warning: GITHUB_TOKEN not set — rate limit is 60 req/hr.")
 
-    all_prs = []
+    all_items = []
     for repo in TARGET_REPOS:
-        all_prs.extend(fetch_all_prs(repo))
+        all_items.extend(fetch_all_prs_and_issues(repo))
 
-    def sort_key(pr):
-        cat = ANNOTATIONS.get((pr["repo"], pr["number"]), {}).get("category", "Other")
+    def sort_key(item):
+        cat = ANNOTATIONS.get((item["repo"], item["number"]), {}).get("category", "Other")
         cat_rank = CATEGORY_ORDER.index(cat) if cat in CATEGORY_ORDER else 99
-        return (cat_rank, -pr["number"])
+        return (cat_rank, -item["number"])
 
-    all_prs.sort(key=sort_key)
+    all_items.sort(key=sort_key)
 
-    print(f"\nBuilding table for {len(all_prs)} PR(s)...")
-    table = build_table(all_prs)
+    print(f"\nBuilding table for {len(all_items)} item(s)...")
+    table = build_table(all_items)
     update_readme(table)
