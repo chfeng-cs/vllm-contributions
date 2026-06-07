@@ -25,11 +25,12 @@ from datetime import datetime, timezone
 GITHUB_USER  = "chfeng-cs"
 TARGET_REPOS = [
     "vllm-project/vllm",
-    # "sgl-project/sglang",
+    "sgl-project/sglang",
+    "flashinfer-ai/flashinfer",
     # "triton-lang/triton",
 ]
 
-CATEGORY_ORDER = ["Issue", "Core Feature", "Bug Fix", "Review / Discussion", "Docs", "Other"]
+CATEGORY_ORDER = ["Issue", "Feature", "Bug Fix", "Review / Discussion", "Docs", "Other"]
 
 # ── MANUAL ANNOTATIONS ────────────────────────────────────────────────────────
 # Key: ("owner/repo", pr_number)
@@ -37,11 +38,11 @@ CATEGORY_ORDER = ["Issue", "Core Feature", "Bug Fix", "Review / Discussion", "Do
 # Unannotated PRs still appear automatically under "Other".
 ANNOTATIONS: dict[tuple[str, int], dict] = {
     ("vllm-project/vllm", 42321): {
-        "category": "Core Feature",
+        "category": "Feature",
         "impact": "~25% TTFT reduction (benchmarked under high load with disk KV prefetch, L20)",
     },
     ("vllm-project/vllm", 41847): {
-        "category": "Core Feature",
+        "category": "Feature",
         "impact": "Reduces user config burden; fixes MultiConnector gap vs PR #42045",
     },
     ("vllm-project/vllm", 42206): {
@@ -94,6 +95,14 @@ ANNOTATIONS: dict[tuple[str, int], dict] = {
     },
     ("vllm-project/vllm", 42846): {
         "category": "Issue",
+        "impact": "—",
+    },
+    ("sgl-project/sglang", 24434): {
+        "category": "Bug Fix",
+        "impact": "—",
+    },
+    ("flashinfer-ai/flashinfer", 3280): {
+        "category": "Feature",
         "impact": "—",
     },
 }

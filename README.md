@@ -1,8 +1,8 @@
-# vLLM Contributions — Ethan Feng (chfeng-cs)
+# Open Source Contributions — Ethan Feng (chfeng-cs)
 
 Focused area: **KV Cache Transfer · Scheduler Optimization · HMA**
 
-Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
+Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm) · [sgl-project/sglang](https://github.com/sgl-project/sglang) · [flashinfer-ai/flashinfer](https://github.com/flashinfer-ai/flashinfer)
 
 ---
 
