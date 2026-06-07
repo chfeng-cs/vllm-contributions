@@ -15,7 +15,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 
 | Issue | Title | Status | Impact |
 |-------|-------|--------|--------|
-| [vllm#42846](https://github.com/vllm-project/vllm/issues/42846) | [Bug][CI] NIXL + FlashInfer fails with Qwen3 MRV2 and --block-size 128 | ❌ Closed | — |
+| [vllm#42846](https://github.com/vllm-project/vllm/issues/42846) | [Bug][CI] NIXL + FlashInfer fails with Qwen3 MRV2 and --block-size 128 | ☑️ Closed | — |
 </details>
 
 ### Core Feature
@@ -51,7 +51,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm)
 | [vllm#42214](https://github.com/vllm-project/vllm/pull/42214) | [Test][Bugfix] Fix mypy error: missing enable_prompt_embeds arg in test_tp_sp_nvfp4_generation | ❌ Closed | Closed: duplicate |
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 
-> Last synced: 2026-06-07 10:49 UTC
+> Last synced: 2026-06-07 10:57 UTC
 <!-- PR_TABLE_END -->
 
 ---

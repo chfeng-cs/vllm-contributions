@@ -176,11 +176,13 @@ def fetch_all_prs_and_issues(repo: str) -> list[dict]:
     return all_items
 
 
-def status_badge(pr: dict) -> str:
-    if pr["state"] == "open":
+def status_badge(item: dict) -> str:
+    if item["state"] == "open":
         return "🔄 Open"
-    if pr["merged_at"]:
-        return "✅ Merged"
+    if item.get("merged_at"):
+        return "☑️ Merged"
+    if item.get("item_type") == "issue":
+        return "☑️ Closed"
     return "❌ Closed"
 
 
