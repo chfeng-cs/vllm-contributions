@@ -48,11 +48,12 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm) · [sgl-pr
 
 | PR | Title | Status | Impact |
 |----|-------|--------|--------|
+| [vllm#45497](https://github.com/vllm-project/vllm/pull/45497) | [Core][KV Connector] Avoid hybrid KV load failure crash | 🔄 Open | — |
 | [vllm#42214](https://github.com/vllm-project/vllm/pull/42214) | [Test][Bugfix] Fix mypy error: missing enable_prompt_embeds arg in test_tp_sp_nvfp4_generation | ❌ Closed | Closed: duplicate |
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-06-12 06:28 UTC
+> Last synced: 2026-06-13 06:11 UTC
 <!-- PR_TABLE_END -->
 
 ---
