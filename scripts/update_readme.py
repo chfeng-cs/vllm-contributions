@@ -30,7 +30,7 @@ TARGET_REPOS = [
     # "triton-lang/triton",
 ]
 
-CATEGORY_ORDER = ["Issue", "Feature", "Bug Fix", "Review / Discussion", "Docs", "Other"]
+CATEGORY_ORDER = ["Issue", "Feature", "Metrics" ,"Bug Fix", "Review / Discussion", "Docs", "Other"]
 
 # ── MANUAL ANNOTATIONS ────────────────────────────────────────────────────────
 # Key: ("owner/repo", pr_number)
