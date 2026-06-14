@@ -26,6 +26,12 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm) · [sgl-pr
 | [vllm#41847](https://github.com/vllm-project/vllm/pull/41847) | [KV Transfer] Enable HMA by default for connectors that support it | ☑️ Merged | Reduces user config burden; fixes MultiConnector gap vs PR #42045 |
 | [flashinfer#3280](https://github.com/flashinfer-ai/flashinfer/pull/3280) | feat(norm): support weightless RMSNorm for FlashNorm weight folding (#3200) | 🔄 Open | — |
 
+### Metrics
+
+| PR | Title | Status | Impact |
+|----|-------|--------|--------|
+| [vllm#42206](https://github.com/vllm-project/vllm/pull/42206) | [Metrics] Add group-aware KV cache capacity to vllm:cache_config_info | ☑️ Merged | Add group-aware KV cache capacity Prometheus gauges |
+
 ### Bug Fix
 
 | PR | Title | Status | Impact |
@@ -53,7 +59,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm) · [sgl-pr
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-06-13 06:11 UTC
+> Last synced: 2026-06-14 02:59 UTC
 <!-- PR_TABLE_END -->
 
 ---
