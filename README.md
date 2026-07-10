@@ -59,7 +59,7 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm) · [sgl-pr
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-07-09 05:58 UTC
+> Last synced: 2026-07-10 05:58 UTC
 <!-- PR_TABLE_END -->
 
 ---
