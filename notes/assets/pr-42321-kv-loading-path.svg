@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820" role="img" aria-labelledby="title desc">
+  <title id="title">KV cache loading path before and after enqueue-time prefetch</title>
+  <desc id="desc">A scientific-style comparison showing that the original path starts LMCache lookup after scheduler queueing, while enqueue-time prefetch overlaps L2-to-L1 KV staging with queue wait. The later start_load_kv path is unchanged in both cases.</desc>
+
+  <defs>
+    <marker id="arrow-dark" markerWidth="6" markerHeight="6" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#25364a"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="6" markerHeight="6" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#2878b5"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="6" markerHeight="6" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#c44e52"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="6" markerHeight="6" refX="5.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#7656a5"/>
+    </marker>
+    <marker id="arrow-kv" markerWidth="3" markerHeight="3" refX="2.75" refY="1.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L3,1.5 L0,3 Z" fill="#16847a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1f2937" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title { font: 700 25px Inter, "Noto Sans", Arial, sans-serif; fill: #17202a; }
+      .subtitle { font: 400 14px Inter, "Noto Sans", Arial, sans-serif; fill: #52606d; }
+      .panel-title { font: 700 18px Inter, "Noto Sans", Arial, sans-serif; fill: #17202a; }
+      .panel-note { font: 400 13px Inter, "Noto Sans", Arial, sans-serif; fill: #52606d; }
+      .step { font: 600 14px Inter, "Noto Sans", Arial, sans-serif; fill: #17202a; text-anchor: middle; }
+      .step-sub { font: 400 12px Inter, "Noto Sans", Arial, sans-serif; fill: #52606d; text-anchor: middle; }
+      .axis { font: 500 12px Inter, "Noto Sans", Arial, sans-serif; fill: #66788a; }
+      .callout { font: 600 13px Inter, "Noto Sans", Arial, sans-serif; }
+      .badge { font: 700 11px "SFMono-Regular", Consolas, "Liberation Mono", monospace; fill: #ffffff; text-anchor: middle; dominant-baseline: middle; }
+      .legend-func { font: 600 11px "SFMono-Regular", Consolas, "Liberation Mono", monospace; fill: #4d356d; }
+      .function-label { font: 600 10px "SFMono-Regular", Consolas, "Liberation Mono", monospace; fill: #65428f; text-anchor: middle; }
+      .transfer { font: 500 9px Inter, "Noto Sans", Arial, sans-serif; fill: #52606d; text-anchor: middle; }
+      .flow { font: 600 10px Inter, "Noto Sans", Arial, sans-serif; fill: #52606d; text-anchor: middle; }
+      .event-label { font: 600 9px Inter, "Noto Sans", Arial, sans-serif; fill: #65428f; text-anchor: end; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="820" fill="#ffffff"/>
+
+  <text x="800" y="43" class="title" text-anchor="middle">Enqueue-time KV Prefetch in LMCacheMPConnector</text>
+  <text x="800" y="68" class="subtitle" text-anchor="middle">Overlapping disk-to-CPU KV staging with scheduler queue wait</text>
+  <line x1="110" y1="82" x2="1540" y2="82" stroke="#66788a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <text x="110" y="75" class="axis">TIME</text>
+
+  <!-- Panel A -->
+  <rect x="45" y="94" width="1525" height="285" rx="8" fill="#fafbfc" stroke="#cbd5df"/>
+  <rect x="45" y="94" width="8" height="285" rx="4" fill="#c44e52"/>
+  <text x="76" y="126" class="panel-title">(a) Original path — lookup starts at scheduling time</text>
+  <text x="76" y="149" class="panel-note">Queue waiting and external KV loading are serialized on the critical path.</text>
+
+  <text x="76" y="207" class="axis">vLLM</text>
+  <g filter="url(#shadow)">
+    <rect x="165" y="165" width="125" height="62" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+    <rect x="315" y="165" width="300" height="62" rx="6" fill="#fff3cd" stroke="#d9a72e"/>
+    <rect x="640" y="165" width="145" height="62" rx="6" fill="#f0eafa" stroke="#7656a5"/>
+    <rect x="1005" y="165" width="170" height="62" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+    <rect x="1190" y="165" width="110" height="62" rx="6" fill="#e7f4f2" stroke="#16847a" stroke-dasharray="4 3"/>
+    <rect x="1320" y="165" width="140" height="62" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+    <rect x="1485" y="165" width="70" height="62" rx="6" fill="#e8f5ee" stroke="#3b8c6e"/>
+  </g>
+  <text x="227.5" y="191" class="step">Enqueue</text><text x="227.5" y="210" class="step-sub">waiting queue</text>
+  <text x="465" y="191" class="step">Queue wait</text><text x="465" y="210" class="step-sub">scheduler backlog</text>
+  <text x="712.5" y="191" class="step">Schedule request</text><text x="712.5" y="210" class="step-sub">scheduler attempt</text>
+  <text x="1090" y="191" class="step">Submit RETRIEVE</text><text x="1090" y="210" class="step-sub">ZMQ request</text>
+  <text x="1245" y="191" class="step">vLLM GPU KV</text><text x="1245" y="210" class="step-sub">IPC-mapped blocks</text>
+  <text x="1390" y="191" class="step">Residual prefill</text><text x="1390" y="210" class="step-sub">suffix / last token</text>
+  <text x="1520" y="191" class="step">Decode</text><text x="1520" y="210" class="step-sub">first token</text>
+  <text x="712.5" y="159" class="function-label">get_num_new_matched_tokens()</text>
+  <text x="1090" y="159" class="function-label">start_load_kv()</text>
+
+  <g transform="translate(0 50)">
+  <text x="76" y="272" class="axis">LMCache</text>
+  <g filter="url(#shadow)">
+    <rect x="640" y="238" width="145" height="48" rx="6" fill="#fde8e8" stroke="#c44e52"/>
+    <rect x="810" y="238" width="170" height="48" rx="6" fill="#fde8e8" stroke="#c44e52"/>
+    <rect x="1005" y="232" width="170" height="60" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+  </g>
+  <text x="712.5" y="266" class="step">Prefix lookup</text>
+  <text x="895" y="253" class="step">KV staging</text>
+  <text x="865" y="276" class="transfer">L2</text>
+  <line x1="882" y1="272" x2="907" y2="272" stroke="#16847a" stroke-width="3.4" marker-end="url(#arrow-kv)"/>
+  <text x="930" y="276" class="transfer">CPU L1</text>
+  <text x="1090" y="250" class="step">LMCache server · H2D</text>
+  <text x="1060" y="278" class="transfer">CPU L1</text>
+  <line x1="1082" y1="274" x2="1107" y2="274" stroke="#16847a" stroke-width="3.4" marker-end="url(#arrow-kv)"/>
+  <text x="1130" y="278" class="transfer">GPU KV</text>
+  <text x="712.5" y="231" class="function-label">LookupModule.lookup()</text>
+  <text x="895" y="231" class="function-label">submit_prefetch_task()</text>
+  </g>
+
+  <line x1="290" y1="196" x2="310" y2="196" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="615" y1="196" x2="635" y2="196" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="712.5" y1="227" x2="712.5" y2="285" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <text x="710" y="246" class="flow">LOOKUP request · ZMQ</text>
+  <path d="M980 311 H990 V196 H1000" fill="none" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <line x1="1055" y1="227" x2="1055" y2="279" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <text x="1043" y="257" class="flow" text-anchor="end">RETRIEVE RPC</text>
+  <path d="M1175 312 H1245 V227" fill="none" stroke="#16847a" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="1255" y="270" class="flow" text-anchor="start">CUDA IPC mapping</text>
+  <line x1="1300" y1="196" x2="1315" y2="196" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="1460" y1="196" x2="1480" y2="196" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+
+  <!-- Panel B -->
+  <g transform="translate(0 60)">
+  <rect x="45" y="354" width="1525" height="320" rx="8" fill="#fafbfc" stroke="#cbd5df"/>
+  <rect x="45" y="354" width="8" height="320" rx="4" fill="#2878b5"/>
+  <text x="76" y="386" class="panel-title">(b) Enqueue-time prefetch — lookup starts when the request is enqueued</text>
+  <text x="76" y="399" class="panel-note">L2-to-L1 staging overlaps queue wait; the subsequent loading and model execution path is unchanged.</text>
+
+  <!-- vLLM lane: scheduler-side lookup decisions and worker-side retrieve submission -->
+  <text x="80" y="461" class="axis">vLLM</text>
+  <g filter="url(#shadow)">
+    <rect x="165" y="430" width="125" height="62" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+    <rect x="315" y="430" width="300" height="62" rx="6" fill="#fff3cd" stroke="#d9a72e"/>
+    <rect x="640" y="430" width="145" height="62" rx="6" fill="#f0eafa" stroke="#7656a5"/>
+    <rect x="810" y="430" width="170" height="62" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+    <rect x="1000" y="430" width="110" height="62" rx="6" fill="#e7f4f2" stroke="#16847a" stroke-dasharray="4 3"/>
+    <rect x="1130" y="430" width="140" height="62" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+    <rect x="1295" y="430" width="70" height="62" rx="6" fill="#e8f5ee" stroke="#3b8c6e"/>
+  </g>
+  <text x="227.5" y="455" class="step">Enqueue</text>
+  <text x="227.5" y="475" class="step-sub">submit prefetch</text>
+  <text x="465" y="455" class="step">Queue wait</text>
+  <text x="465" y="475" class="step-sub">scheduler backlog</text>
+  <text x="712.5" y="455" class="step">Schedule request</text>
+  <text x="712.5" y="475" class="step-sub">check lookup result</text>
+  <text x="895" y="455" class="step">Submit RETRIEVE</text>
+  <text x="895" y="475" class="step-sub">ZMQ request</text>
+  <text x="1055" y="455" class="step">vLLM GPU KV</text>
+  <text x="1055" y="475" class="step-sub">IPC-mapped blocks</text>
+  <text x="1200" y="455" class="step">Residual prefill</text>
+  <text x="1200" y="475" class="step-sub">suffix / last token</text>
+  <text x="1330" y="455" class="step">Decode</text>
+  <text x="1330" y="475" class="step-sub">first token</text>
+  <text x="227.5" y="414" class="function-label">on_new_request()</text>
+  <text x="227.5" y="424" class="function-label">maybe_submit_lookup_request()</text>
+  <text x="712.5" y="424" class="function-label">get_num_new_matched_tokens()</text>
+  <text x="895" y="424" class="function-label">start_load_kv()</text>
+  <line x1="290" y1="461" x2="315" y2="461" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="615" y1="461" x2="635" y2="461" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="785" y1="461" x2="805" y2="461" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <line x1="1270" y1="461" x2="1290" y2="461" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+
+  <!-- LMCache lane -->
+  <g transform="translate(0 50)">
+  <text x="80" y="536" class="axis">LMCache</text>
+  <g filter="url(#shadow)">
+    <rect x="315" y="508" width="145" height="48" rx="6" fill="#dceefa" stroke="#2878b5"/>
+    <rect x="485" y="508" width="170" height="48" rx="6" fill="#dceefa" stroke="#2878b5"/>
+    <rect x="810" y="502" width="170" height="60" rx="6" fill="#edf2f7" stroke="#8395a7"/>
+  </g>
+  <text x="387.5" y="537" class="step">Prefix lookup</text>
+  <text x="570" y="523" class="step">KV staging</text>
+  <text x="540" y="546" class="transfer">L2</text>
+  <line x1="557" y1="542" x2="582" y2="542" stroke="#16847a" stroke-width="3.4" marker-end="url(#arrow-kv)"/>
+  <text x="605" y="546" class="transfer">CPU L1</text>
+  <text x="895" y="520" class="step">LMCache server · H2D</text>
+  <text x="865" y="548" class="transfer">CPU L1</text>
+  <line x1="887" y1="544" x2="912" y2="544" stroke="#16847a" stroke-width="3.4" marker-end="url(#arrow-kv)"/>
+  <text x="935" y="548" class="transfer">GPU KV</text>
+  <text x="387.5" y="497" class="function-label">LookupModule.lookup()</text>
+  <text x="570" y="497" class="function-label">submit_prefetch_task()</text>
+  </g>
+
+  <path d="M227 492 V570 H310" fill="none" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <text x="340" y="516" class="flow">LOOKUP request · ZMQ</text>
+  <path d="M655 582 H712.5 V492" fill="none" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <line x1="860" y1="492" x2="860" y2="549" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <text x="848" y="523" class="flow" text-anchor="end">RETRIEVE RPC</text>
+  <path d="M980 582 H1055 V492" fill="none" stroke="#16847a" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <text x="1065" y="540" class="flow" text-anchor="start">CUDA IPC mapping</text>
+  <line x1="1110" y1="461" x2="1125" y2="461" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+
+  <path d="M315 631 V658 H655 V631" fill="none" stroke="#2878b5" stroke-width="2"/>
+  <text x="485" y="655" class="callout" fill="#2878b5" text-anchor="middle">L2-to-L1 staging is hidden behind queue wait</text>
+
+  </g>
+
+  <!-- Legend and footer -->
+  <line x1="80" y1="783" x2="115" y2="783" stroke="#25364a" stroke-width="2" marker-end="url(#arrow-dark)"/>
+  <text x="123" y="788" class="axis">execution pipeline</text>
+  <line x1="255" y1="783" x2="290" y2="783" stroke="#7656a5" stroke-width="1.7" stroke-dasharray="6 4" marker-end="url(#arrow-purple)"/>
+  <text x="298" y="788" class="axis">ZMQ RPC</text>
+  <line x1="410" y1="783" x2="445" y2="783" stroke="#16847a" stroke-width="2.6" marker-end="url(#arrow-kv)"/>
+  <text x="453" y="788" class="axis">KV data transfer</text>
+</svg>

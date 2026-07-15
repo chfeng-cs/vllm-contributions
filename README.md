@@ -6,6 +6,17 @@ Core repos: [vllm-project/vllm](https://github.com/vllm-project/vllm) · [sgl-pr
 
 ---
 
+## Featured Technical Documents
+
+The following Chinese-language documents are technical notes from my open-source work and are continuously updated.
+
+| Technical Document | Overview |
+|---|---|
+| [LMCache KV Cache 加载链路与关键函数](./notes/lmcache-kv-loading-path.md) | Examines `get_num_new_matched_tokens()`, `maybe_submit_lookup_request()`, `check_lookup_result()`, and `start_load_kv()`, and explains the ZMQ control flow, CPU–GPU data path, and CUDA IPC mechanism. |
+| [入队时 KV Cache 预取：隐藏排队阶段的存储 I/O](./notes/enqueue-time-kv-prefetch.md) | Starts asynchronous KV lookup earlier in `LMCacheMPConnector`, overlapping disk-to-CPU KV staging with scheduler queue wait. Covers the implementation design, performance evaluation, and experiments with hierarchical caching. |
+
+---
+
 ## Contributions
 
 <!-- PR_TABLE_START -->
@@ -71,4 +82,3 @@ transfer between nodes. The PRs above address scheduler-level prefetch schedulin
 hybrid KV cache manager (HMA) defaults to reduce latency and simplify configuration.
 
 Related design notes in [`notes/`](./notes/).
-
