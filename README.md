@@ -70,7 +70,7 @@ The following Chinese-language documents are technical notes from my open-source
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-08-25 02:52 UTC
+> Last synced: 2026-08-26 02:58 UTC
 <!-- PR_TABLE_END -->
 
 ---
