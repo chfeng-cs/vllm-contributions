@@ -47,8 +47,8 @@ The following Chinese-language documents are technical notes from my open-source
 
 | PR | Title | Status | Impact |
 |----|-------|--------|--------|
-| [vllm#44101](https://github.com/vllm-project/vllm/pull/44101) | [LMCache] fix lookup lock leak when request is aborted before alloc | 🔄 Open | — |
-| [vllm#44097](https://github.com/vllm-project/vllm/pull/44097) | [LMCache] fix missing cache_salt in free_lookup_locks call | 🔄 Open | — |
+| [vllm#44101](https://github.com/vllm-project/vllm/pull/44101) | [LMCache] fix lookup lock leak when request is aborted before alloc | ❌ Closed | — |
+| [vllm#44097](https://github.com/vllm-project/vllm/pull/44097) | [LMCache] fix missing cache_salt in free_lookup_locks call | ❌ Closed | — |
 | [vllm#42872](https://github.com/vllm-project/vllm/pull/42872) | [Bugfix][Model Runner v2] Fix MRV2 KV cache kernel block sizing. | ❌ Closed | Closed: implemented by core maintainer |
 | [sglang#24434](https://github.com/sgl-project/sglang/pull/24434) | [NemotronH] Fix expert scale weight loading | ☑️ Merged | — |
 
@@ -70,7 +70,7 @@ The following Chinese-language documents are technical notes from my open-source
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-09-29 07:45 UTC
+> Last synced: 2026-09-30 07:48 UTC
 <!-- PR_TABLE_END -->
 
 ---
