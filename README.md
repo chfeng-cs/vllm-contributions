@@ -33,7 +33,7 @@ The following Chinese-language documents are technical notes from my open-source
 
 | PR | Title | Status | Impact |
 |----|-------|--------|--------|
-| [vllm#42321](https://github.com/vllm-project/vllm/pull/42321) | [KV Connector] Eager KV prefetch at request enqueue time in `LMCacheMPConnector` | 🔄 Open | ~25% TTFT reduction (benchmarked under high load with disk KV prefetch, L20) |
+| [vllm#42321](https://github.com/vllm-project/vllm/pull/42321) | [KV Connector] Eager KV prefetch at request enqueue time in `LMCacheMPConnector` | ❌ Closed | ~25% TTFT reduction (benchmarked under high load with disk KV prefetch, L20) |
 | [vllm#41847](https://github.com/vllm-project/vllm/pull/41847) | [KV Transfer] Enable HMA by default for connectors that support it | ☑️ Merged | Reduces user config burden; fixes MultiConnector gap vs PR #42045 |
 | [flashinfer#3280](https://github.com/flashinfer-ai/flashinfer/pull/3280) | feat(norm): support weightless RMSNorm for FlashNorm weight folding (#3200) | 🔄 Open | — |
 
@@ -70,7 +70,7 @@ The following Chinese-language documents are technical notes from my open-source
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-10-03 07:24 UTC
+> Last synced: 2026-10-04 07:39 UTC
 <!-- PR_TABLE_END -->
 
 ---
