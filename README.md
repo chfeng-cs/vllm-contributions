@@ -41,7 +41,7 @@ The following Chinese-language documents are technical notes from my open-source
 
 | PR | Title | Status | Impact |
 |----|-------|--------|--------|
-| [vllm#42206](https://github.com/vllm-project/vllm/pull/42206) | [Metrics] Add group-aware KV cache capacity to vllm:cache_config_info | ❌ Closed | Add group-aware KV cache capacity Prometheus gauges |
+| [vllm#42206](https://github.com/vllm-project/vllm/pull/42206) | [Metrics] Add group-aware KV cache capacity to vllm:cache_config_info | ☑️ Merged | Add group-aware KV cache capacity Prometheus gauges |
 
 ### Bug Fix
 
@@ -70,7 +70,7 @@ The following Chinese-language documents are technical notes from my open-source
 | [vllm#42086](https://github.com/vllm-project/vllm/pull/42086) | [Core][KV Connector] Bounded early prefetch for waiting requests | ❌ Closed | Closed: first version of PR #42321, abandoned due to significant design differences |
 | [flashinfer#3273](https://github.com/flashinfer-ai/flashinfer/pull/3273) | docs: update contributing repository layout | 🔄 Open | — |
 
-> Last synced: 2026-10-21 06:52 UTC
+> Last synced: 2026-10-22 06:56 UTC
 <!-- PR_TABLE_END -->
 
 ---
